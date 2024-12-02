@@ -1,0 +1,61 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Condomínio</h1>
+  
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Condomínios</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Chave</th>
+                <th>Nome</th>
+                <th>Cnpj</th>
+                <th>Cidade</th>
+                <th>Bairro</th>
+                <th>Cep</th>
+                <th>Logradouro</th>
+                <th>Complemento</th>
+                <th>Numero</th>
+              </tr>
+            </thead>
+           <!-- <tfoot>
+              <tr>
+                <th>Chave</th>
+                <th>Nome</th>
+                <th>Cnpj</th>
+                <th>Cidade</th>
+                <th>Bairro</th>
+                <th>Cep</th>
+                <th>Logradouro</th>
+                <th>Complemento</th>
+                <th>Numero</th>
+              </tr>
+            </tfoot>-->
+            <tbody>
+              <tr *ngFor="let condominio of condominios">
+                <td>{{ condominio.tenante }}</td>
+                <td>{{ condominio.nome }}</td>
+                <td>{{ condominio.cnpj }}</td>                
+                <td>{{ condominio.cidade }}</td>
+                <td>{{ condominio.bairro }}</td>
+                <td>{{ condominio.cep }}</td>
+                <td>{{ condominio.logradouro }}</td>
+                <td>{{ condominio.complemento }}</td>
+                <td>{{ condominio.numero }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <!-- /.container-fluid -->
+  
