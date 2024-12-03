@@ -3,7 +3,7 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { BlocosComponent } from './cadastros/blocos/blocos.component';
 import { MoradoresComponent } from './cadastros/moradores/moradores.component';
 import { ApartamentosComponent } from './cadastros/apartamentos/apartamentos.component';
-import { CondominioComponent } from './cadastros/condominios/pagina/condominio/condominio.component';
+import { CondominioComponent } from './cadastros/condominios/pagina/condominio/CondominioComponent';
 
 export const routes: Routes = [
     {
