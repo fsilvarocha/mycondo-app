@@ -9,8 +9,8 @@ export class MensagenService {
 
   constructor(private toastr: ToastrService) { }
 
-  showErrorMessage() {
-    this.toastr.error('Ocorreu um erro inesperado', 'Erro');
+  showErrorMessage(msg?: string) {
+    this.toastr.error(msg??'Ocorreu um erro inesperado', 'Erro');
   }
 
   showAlertaMessage(msg: string) {
