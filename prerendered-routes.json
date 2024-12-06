@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/mycondo-app": {},
+    "/mycondo-app/cadastros/apartamentos": {},
+    "/mycondo-app/cadastros/blocos": {},
+    "/mycondo-app/cadastros/condominios": {},
+    "/mycondo-app/cadastros/moradores": {}
+  }
+}
