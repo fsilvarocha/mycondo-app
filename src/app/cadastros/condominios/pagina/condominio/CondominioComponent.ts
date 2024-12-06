@@ -5,6 +5,8 @@ import { ReactiveFormsModule, FormGroup, FormBuilder } from "@angular/forms";
 import { lastValueFrom } from "rxjs";
 import { MensagenService } from 'src/app/shared/services/mensagem.service';
 import { CondominiosService } from 'src/app/cadastros/condominios/services/condominios.service';
+import { TipoCondonminioEnum, TipoCondonminioEnumDescricao } from "src/app/shared/enumeradores/tipo-condominio.enum";
+import { CondominiosEditarRequest } from 'src/app/cadastros/condominios/models/Request/condominio-editar.request';
 
 
 @Component({
@@ -17,15 +19,21 @@ import { CondominiosService } from 'src/app/cadastros/condominios/services/condo
 export class CondominioComponent implements OnInit {
 
   condominioForm!: FormGroup;
+  tipoCondominioOpcoes: { id: TipoCondonminioEnum; descricao: string }[] = [];
 
   constructor(private fb: FormBuilder,
     private condominioService: CondominiosService,
     private mensagensService : MensagenService
-) { }
+) { 
+  this.condominioForm = this.fb.group({
+    tipoCondominio: [null], 
+  });
+}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.inicializarFormulario();
     this.carregarCondominiosAsync();
+
   }
 
   inicializarFormulario() {
@@ -34,12 +42,16 @@ export class CondominioComponent implements OnInit {
       tenante: [''],
       nome: [''],
       cnpj: [''],
-      cidade: [''],
-      bairro: [''],
+      tipoCondominio:[''],
+      logo:[''],
+      areaTotal:[''],
       cep: [''],
+      cidade: [''],
+      uf:[''],
+      bairro: [''],
       logradouro: [''],
-      complemento: [''],
-      numero: ['']
+      numero: [''],
+      complemento: ['']
     });
   }
 
@@ -49,20 +61,14 @@ export class CondominioComponent implements OnInit {
 
       if (data && data.length > 0) {
         const condominio = data[0];
-        const mappedData = {
-          id: condominio.id || '',
-          tenante: condominio.tenante || '',
-          nome: condominio.nome || '',
-          cnpj: condominio.cnpj || '',
-          cidade: condominio.cidade || '',
-          bairro: condominio.bairro || '',
-          cep: condominio.cep || '',
-          logradouro: condominio.logradouro || '',
-          complemento: condominio.complemento || '',
-          numero: condominio.numero || ''
-        };
-
-        this.condominioForm.patchValue(mappedData);
+        condominio.tipoCondominioDescricao = TipoCondonminioEnumDescricao[condominio.tipoCondominio];
+        this.tipoCondominioOpcoes = Object.keys(TipoCondonminioEnum)
+        .filter(key => !isNaN(Number(key))) 
+        .map(key => ({
+          id: Number(key),
+          descricao: TipoCondonminioEnumDescricao[Number(key) as TipoCondonminioEnum]
+        }));
+        this.condominioForm.patchValue(condominio);
       } else {
         this.mensagensService.showAlertaMessage("Condomínio nao encontrado/cadastrado");
       }
@@ -81,16 +87,41 @@ export class CondominioComponent implements OnInit {
     }
   }
 
+ 
 
 
-  onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.condominioForm.valid) {
       const formValues = this.condominioForm.value;
-      console.log('Dados enviados:', formValues);
-      this.mensagensService.showSucessoMessage("Dados enviados com sucesso");
-      // Lógica para enviar os dados
+
+      const editarRequest = new CondominiosEditarRequest({
+        id: formValues.id,
+        tenante: formValues.tenante,
+        nome: formValues.nome,
+        cnpj: formValues.cnpj,
+        tipoCondominio: Number(formValues.tipoCondominio),
+        logo: formValues.logo,
+        areaTotal: formValues.areaTotal,
+        cep: formValues.cep,
+        cidade: formValues.cidade,
+        uf: formValues.uf,
+        bairro: formValues.bairro,
+        logradouro: formValues.logradouro,
+        numero: formValues.numero,
+        complemento: formValues.complemento,
+      });
+      try {
+        // Envia o objeto para a API usando o CondominiosService
+        await lastValueFrom(this.condominioService.editarCondominio(editarRequest));
+        this.mensagensService.showSucessoMessage('Condomínio editado com sucesso!');
+      } catch (error) {
+        console.error('Erro ao editar condomínio:', error);
+        this.mensagensService.showErrorMessage('Erro ao editar condomínio. Verifique os dados e tente novamente.');
+      }
     } else {
       console.log('Formulário inválido');
+      this.mensagensService.showAlertaMessage('Formulário inválido. Preencha todos os campos obrigatórios.');
     }
   }
+
 }

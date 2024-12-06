@@ -21,38 +21,59 @@
             <label for="nome" class="form-label">Nome</label>
             <input type="text" id="nome" class="form-control" formControlName="nome">
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <label for="cnpj" class="form-label">CNPJ</label>
             <input type="text" id="cnpj" class="form-control" formControlName="cnpj">
           </div>
         </div>
         <div class="row g-3 mt-2">
-          <div class="col-sm-4">
+         <!-- <div class="col-sm-2">
+            <label for="cidade" class="form-label">Tipo Condomínio</label>
+            <input type="text" id="cidade" class="form-control" formControlName="tipoCondominio">
+          </div> -->   
+          <div class="col-sm-2">
+            <label for="tipoCondominio" class="form-label">Tipo Condomínio</label>
+            <select id="tipoCondominio" class="form-select" formControlName="tipoCondominio">
+              <option *ngFor="let tipo of tipoCondominioOpcoes" [value]="tipo.id">
+                {{ tipo.descricao }}
+              </option>
+            </select>
+          </div>         
+                       
+          <div class="col-sm-3">
             <label for="cidade" class="form-label">Cidade</label>
             <input type="text" id="cidade" class="form-control" formControlName="cidade">
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <label for="bairro" class="form-label">Bairro</label>
             <input type="text" id="bairro" class="form-control" formControlName="bairro">
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-1">
             <label for="cep" class="form-label">CEP</label>
             <input type="text" id="cep" class="form-control" formControlName="cep">
           </div>
+          <div class="col-sm-1">
+            <label for="cep" class="form-label">Àrea Total</label>
+            <input type="text" id="cep" class="form-control" formControlName="areaTotal">
+          </div>          
         </div>
         <div class="row g-3 mt-2">
+          <div class="col-sm-1">
+            <label for="logradouro" class="form-label">Uf</label>
+            <input type="text" id="logradouro" class="form-control" formControlName="uf">
+          </div>          
           <div class="col-sm-4">
             <label for="logradouro" class="form-label">Logradouro</label>
             <input type="text" id="logradouro" class="form-control" formControlName="logradouro">
           </div>
-          <div class="col-sm-4">
-            <label for="complemento" class="form-label">Complemento</label>
-            <input type="text" id="complemento" class="form-control" formControlName="complemento">
-          </div>
-          <div class="col-sm-4">
+          <div class="col-sm-1">
             <label for="numero" class="form-label">Número</label>
             <input type="text" id="numero" class="form-control" formControlName="numero">
           </div>
+          <div class="col-sm-4">
+            <label for="complemento" class="form-label">Complemento</label>
+            <input type="text" id="complemento" class="form-control" formControlName="complemento">
+          </div>          
         </div>
         <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
       </form>

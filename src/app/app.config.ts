@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr({
       closeButton:true,
-      timeOut:1500,
+      timeOut:2500,
       positionClass:'toast-top-right',
       progressBar:true,
       progressAnimation:"decreasing",
