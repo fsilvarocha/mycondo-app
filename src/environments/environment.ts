@@ -1,10 +1,10 @@
-const LOCALHOST = "http://localhost";
+const LOCALHOST = "https://mycondo-administracao.onrender.com";
 
 export const environment = {
     production:false,
     config:{
         apis:{
-            condominioAPI:"https://localhost:7150/api/Condominios"
+            condominioAPI:"https://mycondo-administracao.onrender.com/api/Condominios"
         }
     }
 };
