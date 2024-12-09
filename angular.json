@@ -12,7 +12,13 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
+          "server":{
+              "options":{
+                "proxyConfig": "proxy.conf.json"
+              }
+          },
           "options": {
+            
             "outputPath": "dist/mycondo-app",
             "index": "src/index.html",
             "browser": "src/main.ts",

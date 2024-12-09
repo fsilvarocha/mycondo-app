@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
 import { CondominiosResponse } from "../models/Response/condominio.response";
 import { CondominiosEditarRequest } from 'src/app/cadastros/condominios/models/Request/condominio-editar.request';
 import { GuidService } from "src/app/shared/services/guid.service";
+import { environment } from "src/environments/environment";
 
 
 
